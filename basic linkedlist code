@@ -1,0 +1,80 @@
+//things to look after while doing linkedlist 
+note :::
+1. while using double pointer and single pointer whlie inserting into linkedlist
+2. reverse in groups of size k
+3. detect and remove loop
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+struct node{
+    int data;
+    struct node* next;
+};
+struct node* newnode(int data)
+{
+    struct node* newn = (struct node* )malloc(sizeof(struct node));
+    newn->next = NULL;
+    newn->data = data;
+    return newn;
+}
+struct node* insert(struct node* head, int data)
+{
+    if(head==0)
+    {
+        head = newnode(data);
+        return head;
+    }
+    else {
+        struct node* temp = head;
+        while(temp->next!=NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = newnode(data);
+        temp->next->next  = NULL;
+        return head;
+        
+    }
+
+}
+void printlist(struct node* head)
+{
+
+while(head!=NULL)
+{
+    cout<<head->data<<" ";
+    head = head->next;
+}
+
+
+}
+void reverse_list(struct node* head)
+{
+struct node* cur = head,*further = NULL,*prev = NULL;
+while(cur!=NULL)
+{
+further = cur->next;
+cur->next = prev;
+prev = cur;
+cur = further;
+}
+head = prev;
+}
+int main()
+{
+
+struct node* head = NULL;
+head = insert(head,6);
+insert(head,5);
+insert(head,4);
+insert(head,3);
+insert(head,2);
+insert(head,1);
+printlist(head);
+reverse_list(head);
+cout<<endl;
+printlist(head);
+    
+}
