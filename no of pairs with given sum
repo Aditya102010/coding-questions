@@ -1,0 +1,34 @@
+//check if subarray exists with sum equal to p
+
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    int n;
+    cin>>n;
+
+    vector<int>a;
+    for(int i= 0;i<n;i++)
+    {
+        int x;
+        cin>>x;
+        a.push_back(x);
+    }
+    //create a map 
+    // traverese the array and check if complement exists for 
+    //and ele or not
+
+    //
+    int given_sum,cnt = 0 ;cin>>given_sum;
+    map<int,int>m;
+    for(int i=  0;i<n;i++)
+    {
+        if(m.find(given_sum-a[i])!=m.end())
+        {
+            cnt += 1;
+        }
+        m[a[i]]++;
+    }
+    cout<<"The count of pairs having sum exactly equal to given sum ";
+    cout<<cnt;
+    
+}
