@@ -1,0 +1,92 @@
+#include <bits/stdc++.h>
+#include<stdio.h>
+using namespace std;
+struct node {
+    struct node* left, *right;
+    int data;
+    int value;
+};
+struct node* newnode(int data){
+struct node* newn = (struct node*)malloc(sizeof(struct node));
+newn->data = data;
+newn->right = newn->left = NULL;
+return newn;
+}
+void level_order(struct node* root){
+
+    queue<struct node* >q;
+    q.push(root);
+    while(!q.empty())
+    {       
+
+        struct node*  y = q.front();
+        printf("%d",y->data);
+        q.pop();
+        //struct node* x = q.front();
+        if(y->left!=NULL){q.push(y->left);}
+        if(y->right!=NULL){q.push(y->right);}
+    }
+
+}
+void inorder(struct node* root)
+{
+    if(root!=NULL)
+    {
+        
+        inorder(root->left);
+        cout<<root->data;
+        inorder(root->right);
+    }
+}
+struct node* insert(struct node* root,int data){
+if(root==NULL){
+    root = newnode(data);
+    return root;
+}
+else if(root->data>data){
+    root->left = insert(root->left,data);
+}
+else {
+    root->right = insert(root->right, data);
+}
+return root;
+
+
+}
+bool check_bst(struct node* root){
+if(root==NULL){
+    return true;
+}
+if(root->left->data<root->data && root->right->data>root->data){
+return check_bst(root->left) && check_bst(root->right);
+}
+else {
+    return false;
+}
+
+
+}
+/*void leveldecide(struct node* root)
+{
+
+}
+*/
+int main() {
+    
+
+    struct node * root =   NULL;
+    root = insert(root,5);
+    insert(root,3);
+    insert(root,7);
+    insert(root,2);
+    insert(root,1);
+    insert(root,9);
+    cout<<"the inorder traversal"<<endl;
+    inorder(root);
+    cout<<"the level order traversal of the given tree is"<<endl;
+    level_order(root);
+
+
+    
+
+}
